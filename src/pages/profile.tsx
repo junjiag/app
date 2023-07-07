@@ -15,7 +15,6 @@ import {
   Spacer,
   HStack,
   SimpleGrid,
-  Center,
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import AppLayout from 'AppLayout'
@@ -98,7 +97,10 @@ const UserProfile: NextPageWithLayout = () => {
             <FormLabel marginTop='5px'>中文全名</FormLabel>
           </Box>
           <Box width='200%'>
-            <Editable defaultValue={user.name ? user.name : undefined}>
+            <Editable 
+              defaultValue={user.name ? user.name : undefined}
+              onChange={(newName) => setName(newName)}
+            >
               <HStack>
                 <Box width='200%'>
                   <EditablePreview/>
@@ -106,7 +108,6 @@ const UserProfile: NextPageWithLayout = () => {
                     as={EditableInput}
                     backgroundColor={notLoaded ? 'brandscheme' : 'white'}
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
                     isReadOnly={notLoaded}
                   />
                 </Box>
