@@ -14,6 +14,8 @@ import {
   IconButton,
   Spacer,
   HStack,
+  SimpleGrid,
+  Center,
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import AppLayout from 'AppLayout'
@@ -62,12 +64,12 @@ const UserProfile: NextPageWithLayout = () => {
     } = useEditableControls()
 
     return isEditing ? (
-      <ButtonGroup justifyContent='center' size='sm'>
+      <ButtonGroup justifyContent='left' size='sm'>
         <IconButton aria-label='confirm name change button' icon={<CheckIcon />} {...getSubmitButtonProps()} />
         <IconButton aria-label='cancel name change button' icon={<CloseIcon />} {...getCancelButtonProps()} />
       </ButtonGroup>
     ) : (
-      <ButtonGroup justifyContent='center' size='sm'>
+      <ButtonGroup justifyContent='left' size='sm'>
         <IconButton aria-label='edit name button' size='sm' icon={<EditIcon />} {...getEditButtonProps()} />
       </ButtonGroup>
     )
@@ -76,14 +78,14 @@ const UserProfile: NextPageWithLayout = () => {
   const EmailField = () => {
     return (
       <FormControl>
-        <HStack spacing='24px'>
+        <SimpleGrid columns={8}>
           <Box>
-            <FormLabel marginTop='10px'>邮箱</FormLabel>
+            <FormLabel marginTop='2px'>邮箱</FormLabel>
           </Box>
-          <Box>
+          <Box width='300%'>
             {user.email}
           </Box>
-        </HStack>
+        </SimpleGrid>
       </FormControl>
     )
   }
@@ -91,15 +93,15 @@ const UserProfile: NextPageWithLayout = () => {
   const NameField = () => {
     return (
       <FormControl isInvalid={!name}>
-        <HStack spacing='24px'>
+        <SimpleGrid columns={8}>
           <Box>
-            <FormLabel marginTop='10px'>中文全名</FormLabel>
+            <FormLabel marginTop='5px'>中文全名</FormLabel>
           </Box>
-          <Box>
+          <Box width='200%'>
             <Editable defaultValue={user.name ? user.name : undefined}>
               <HStack>
-                <Box>
-                  <EditablePreview />
+                <Box width='200%'>
+                  <EditablePreview/>
                   <Input
                     as={EditableInput}
                     backgroundColor={notLoaded ? 'brandscheme' : 'white'}
@@ -115,17 +117,17 @@ const UserProfile: NextPageWithLayout = () => {
               </HStack>
             </Editable>
           </Box>
-        </HStack>
+        </SimpleGrid>
         <FormErrorMessage>用户姓名不能为空</FormErrorMessage>
       </FormControl>
     )
   }
 
   return (
-    <Box paddingTop={'80px'}>
+    <Box paddingTop='80px'>
       <Stack spacing={4}>
-        <EmailField />
-        <NameField />
+          <EmailField />
+          <NameField />
         <Button 
           onClick={handleSubmit} 
           isLoading={notLoaded}
